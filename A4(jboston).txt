@@ -1,0 +1,50 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.datasets import load_boston
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, mean_absolute_error
+from sklearn.preprocessing import StandardScaler
+import warnings
+warnings.filterwarnings("ignore")
+%matplotlib inline
+
+boston = load_boston()
+boston.keys()
+
+x = pd.DataFrame(boston.data, columns=boston.feature_names)
+y = pd.DataFrame(boston.target, columns=['MEDV'])
+
+x.head()
+
+y.head()
+
+x.shape, y.shape
+
+#Basic stats
+x.info()
+
+x.describe()
+
+y.info()
+
+y.describe()
+
+
+x.isnull().sum()
+
+y.isnull().sum()
+
+df = x 
+df["target"] = y
+df.head()
+
+plt.figure(figsize=(15,10))
+sns.heatmap(df.corr(), annot=True)
+plt.show()
+
+df = df[['RM', 'LSTAT', 'target']]
+sns.pairplot(df)
+plt.show()
